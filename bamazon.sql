@@ -24,11 +24,11 @@ values ('Harry Potter: Complete Blue-Ray Collection', 'Movies', 39.99, 80);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 values ('Alita: Battle Angel Blue Ray', 'Movies', 18.82, 30);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-values ('Hasbro Connect 4', 'Toys', 5.16, 150);
+values ('Hasbro Connect 4', 'Toys', 5.16, 1);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 values ('Mr Potato Head Disney', 'Toys', 9.96, 130);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-values ('Oculus Quest', 'Electronics', 499.00, 70);
+values ('Oculus Quest', 'Electronics', 499.00, 4);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 values ('Cartman 148-Piece Tool Set', 'Tools and Equipment', 24.99, 40);
 

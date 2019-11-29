@@ -52,6 +52,9 @@ function start() {
                 case "viewProducts":
                     viewProductsTable();
                     break;
+                case "viewLowInventory":
+                    viewLowInventory();
+                    break;
                 default:
                     console.log("No Choice");
                     break;
@@ -61,6 +64,31 @@ function start() {
 
 function viewProductsTable() {
     let query = "SELECT * FROM products";
+    connection.query(query, function (err, result) {
+        if (err) throw err;
+        var tableItems = result.map(item => {
+            return [
+                item.item_id,
+                item.product_name,
+                item.department_name,
+                `$${item.price.toFixed(2)}`,
+                item.stock_quantity
+            ];
+        });
+
+        var table = AsciiTable.factory({
+            title: 'BAMAZON',
+            heading: ['ID', 'Name', 'Department', 'Price', 'Quantity'],
+            rows: tableItems
+        }).setAlign(4, AsciiTable.CENTER);
+
+        console.log(table.toString());
+        start();
+    });
+}
+
+function viewLowInventory(){
+    let query = "SELECT * FROM products WHERE stock_quantity < 5";
     connection.query(query, function (err, result) {
         if (err) throw err;
         var tableItems = result.map(item => {
