@@ -87,7 +87,7 @@ function placeOrder(customerRequest, product) {
             var table = new AsciiTable();
             table
                 .setHeading('Order Total')
-                .addRow(totalCost.toLocaleString('en-IN', { style: 'currency', currency: 'USD' }))
+                .addRow(totalCost.toLocaleString('en-US', { style: 'currency', currency: 'USD' }))
                 .setAlign(0, AsciiTable.CENTER);
 
             console.log(table.toString());
