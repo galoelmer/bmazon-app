@@ -55,6 +55,9 @@ function start() {
                 case "viewLowInventory":
                     viewLowInventory();
                     break;
+                case "addToInventory":
+                    addToInventory();
+                    break;
                 default:
                     console.log("No Choice");
                     break;
@@ -87,7 +90,7 @@ function viewProductsTable() {
     });
 }
 
-function viewLowInventory(){
+function viewLowInventory() {
     let query = "SELECT * FROM products WHERE stock_quantity < 5";
     connection.query(query, function (err, result) {
         if (err) throw err;
@@ -110,4 +113,39 @@ function viewLowInventory(){
         console.log(table.toString());
         start();
     });
+}
+
+function addToInventory() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "itemId",
+                message: "Enter Product ID"
+            },
+            {
+                type: "number",
+                name: "quantity",
+                message: "Enter Quantity"
+            }
+        ]).then(function (result) {
+            let query = "UPDATE products SET stock_quantity = stock_quantity + ? WHERE item_id=?";
+            connection.query(query, [result.quantity, result.itemId], function (err) {
+                if (err) throw err;
+
+                let query = "SELECT item_id, product_name, stock_quantity FROM products WHERE item_id=?";
+                connection.query(query, [result.itemId], function(err, response){
+                    if (err) throw err;
+
+                    var table = new AsciiTable("Updated Item");
+                    table
+                        .setHeading('ID', 'Name', 'Quantity')
+                        .addRow([response[0].item_id, response[0].product_name, response[0].stock_quantity])
+                        .setAlign(2, AsciiTable.CENTER);
+
+                    console.log(table.toString());
+                    start();
+                });
+            });
+        });
 }
