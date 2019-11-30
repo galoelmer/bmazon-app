@@ -58,8 +58,8 @@ function start() {
                 case "addToInventory":
                     addToInventory();
                     break;
-                default:
-                    console.log("No Choice");
+                case "addNewProduct":
+                    addNewProduct();
                     break;
             }
         });
@@ -146,6 +146,48 @@ function addToInventory() {
                     console.log(table.toString());
                     start();
                 });
+            });
+        });
+}
+
+function addNewProduct() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "productName",
+                message: "Enter product's name"
+            },
+            {
+                type: "input",
+                name: "departmentName",
+                message: "Enter department's name"
+            },
+            {
+                type: "number",
+                name: "price",
+                message: "Enter item's price"
+            },
+            {
+                type: "number",
+                name: "stockQuantity",
+                message: "Enter Quantity"
+            }
+        ]).then(function(result){
+            let query = "INSERT INTO products(product_name, department_name, price, stock_quantity) VALUES(?,?,?,?)";
+            connection.query(query, [result.productName, result.departmentName, result.price, result.stockQuantity], function(err, response){
+                if (err) throw err;
+                connection.query("SELECT * FROM products WHERE item_id =?", [response.insertId], function(err, response){
+                    if (err) throw err;
+                    var table = new AsciiTable("New Product Added");
+                    table
+                        .setHeading('ID', 'Name', 'Department', 'Price', 'Quantity')
+                        .addRow([response[0].item_id, response[0].product_name, response[0].department_name, "$" + response[0].price, response[0].stock_quantity])
+                        .setAlign(4, AsciiTable.CENTER);
+
+                    console.log(table.toString());
+                    start();
+                })
             });
         });
 }
