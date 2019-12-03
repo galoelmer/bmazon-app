@@ -40,5 +40,9 @@ values ('Oculus Quest', 'Electronics', 499.00, 4);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 values ('Cartman 148-Piece Tool Set', 'Tools and Equipment', 24.99, 40);
 
+INSERT INTO departments (department_name, over_head_costs)
+values ('Books', 4000);
+INSERT INTO departments (department_name, over_head_costs)
+values ('Electronics', 5000);
 
 SELECT * FROM products;
