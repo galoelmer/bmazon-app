@@ -64,17 +64,22 @@ function start() {
                     placeOrder(customerRequest, product);
                 } else {
                     console.log("\n***** Insufficient Quantity *****\n");
+                    start();
                 }
             });
         });
 }
 
 function placeOrder(customerRequest, product) {
+    var totalCost = product[0].price * customerRequest.quantity;
     connection.query(
-        "UPDATE products SET ? WHERE ?",
+        "UPDATE products SET ?, ? WHERE ?",
         [
             {
                 stock_quantity: product[0].stock_quantity - customerRequest.quantity
+            },
+            {
+                product_sales: totalCost
             },
             {
                 item_id: customerRequest.id
@@ -82,7 +87,6 @@ function placeOrder(customerRequest, product) {
         ],
         function (error) {
             if (error) throw err;
-            var totalCost = product[0].price * customerRequest.quantity;
 
             var table = new AsciiTable();
             table
@@ -91,6 +95,7 @@ function placeOrder(customerRequest, product) {
                 .setAlign(0, AsciiTable.CENTER);
 
             console.log(table.toString());
+            start();
         }
     );
 }
