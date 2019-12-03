@@ -19,6 +19,7 @@ CREATE TABLE departments(
   PRIMARY KEY (department_id)
 );
 
+-- Insert sample data to products table
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 values ('Eloquent JavaScript, 3rd Ed', 'Books', 26.23, 50);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
@@ -40,9 +41,14 @@ values ('Oculus Quest', 'Electronics', 499.00, 4);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 values ('Cartman 148-Piece Tool Set', 'Tools and Equipment', 24.99, 40);
 
+-- Inset sample data to departments table
 INSERT INTO departments (department_name, over_head_costs)
 values ('Books', 4000);
 INSERT INTO departments (department_name, over_head_costs)
-values ('Electronics', 5000);
+values ('Electronics', 10000);
+INSERT INTO departments (department_name, over_head_costs)
+values ('Movies', 8000);
+INSERT INTO departments (department_name, over_head_costs)
+values ('Toys', 3000);
 
 SELECT * FROM products;

@@ -81,3 +81,38 @@ function viewSalesByDepartment() {
         start();
     });
 }
+
+function createNewDepartment() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "departmentName",
+                message: "Enter new department name"
+            },
+            {
+                type: "number",
+                name: "overHeadCost",
+                message: "Enter Overhead Cost"
+            }
+        ]).then(function (result) {
+            let query = "INSERT INTO departments (department_name, over_head_costs)";
+            query += " values(?, ?)";
+            connection.query(query, [result.departmentName, result.overHeadCost], function (err, response) {
+                if (err) throw err;
+                connection.query("SELECT * FROM departments WHERE department_id=?", [response.insertId], function (err, result) {
+                    if (err) throw err;
+                    //console.log(result);
+                    var table = new AsciiTable("New Department added");
+                    table
+                        .setHeading('Department ID', 'Department Name', 'Overhead Cost')
+                        .addRow(result[0].department_id, result[0].department_name, "$" + result[0].over_head_costs.toFixed(2))
+                        .setAlignCenter(0)
+                        .setAlignCenter(1)
+
+                    console.log(table.toString());
+                    start();
+                });
+            });
+        });
+}
