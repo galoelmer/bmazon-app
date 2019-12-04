@@ -21,34 +21,34 @@ CREATE TABLE departments(
 
 -- Insert sample data to products table
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-values ('Eloquent JavaScript, 3rd Ed', 'Books', 26.23, 50);
+values ('Eloquent JavaScript, 3rd Ed', 'Books', 26.23, 100);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-values ('JavaScript The Good Parts', 'Books', 17.59, 60);
+values ('JavaScript The Good Parts', 'Books', 17.59, 160);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-values ('Apple iPad', 'Electronics', 429.00, 100);
+values ('Apple iPad', 'Electronics', 429.00, 300);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-values ('Nintendo Classic Edition', 'Electronics', 94.90, 35);
+values ('Nintendo Classic Edition', 'Electronics', 94.90, 350);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-values ('Harry Potter: Complete Blue-Ray Collection', 'Movies', 39.99, 80);
+values ('Harry Potter: Complete Blue-Ray Collection', 'Movies', 39.99, 800);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-values ('Alita: Battle Angel Blue Ray', 'Movies', 18.82, 30);
+values ('Alita: Battle Angel Blue Ray', 'Movies', 18.82, 300);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-values ('Hasbro Connect 4', 'Toys', 5.16, 1);
+values ('Hasbro Connect 4', 'Toys', 5.16, 400);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-values ('Mr Potato Head Disney', 'Toys', 9.96, 130);
+values ('Mr Potato Head Disney', 'Toys', 9.96, 150);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-values ('Oculus Quest', 'Electronics', 499.00, 4);
+values ('Oculus Quest', 'Electronics', 499.00, 100);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-values ('Cartman 148-Piece Tool Set', 'Tools and Equipment', 24.99, 40);
+values ('Cartman 148-Piece Tool Set', 'Tools and Equiptment', 24.99, 400);
 
 -- Inset sample data to departments table
 INSERT INTO departments (department_name, over_head_costs)
-values ('Books', 4000);
+values ('Books', 3500);
 INSERT INTO departments (department_name, over_head_costs)
-values ('Electronics', 10000);
+values ('Electronics', 120000);
 INSERT INTO departments (department_name, over_head_costs)
-values ('Movies', 8000);
+values ('Movies', 30000);
 INSERT INTO departments (department_name, over_head_costs)
-values ('Toys', 3000);
+values ('Tools and Equiptment', 5000);
 
 SELECT * FROM products;
