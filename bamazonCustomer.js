@@ -59,7 +59,7 @@ function start() {
             connection.query(
                 "SELECT stock_quantity, price FROM products WHERE item_id=?", [customerRequest.id], function (err, product) {
                 if (err) throw err;
-
+                // Check if store inventory has enough of the product to meet the customer's request.
                 if (customerRequest.quantity <= product[0].stock_quantity) {
                     placeOrder(customerRequest, product);
                 } else {
@@ -70,8 +70,11 @@ function start() {
         });
 }
 
+// Function calculates customers' total cost of their purchase and updates current inventory
 function placeOrder(customerRequest, product) {
+    // Calculate total cost
     var totalCost = product[0].price * customerRequest.quantity;
+    //Update database with customer input and calculated cost
     connection.query(
         "UPDATE products SET ?, ? WHERE ?",
         [

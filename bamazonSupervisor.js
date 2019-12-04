@@ -51,6 +51,7 @@ function start() {
         });
 }
 
+// Function displays all the items from departments table
 function viewSalesByDepartment() {
     let query = "SELECT department_id, departments.department_name, over_head_costs,";
     query += " SUM(product_sales) AS product_sales, (SUM(product_sales) - over_head_costs)";
@@ -82,6 +83,7 @@ function viewSalesByDepartment() {
     });
 }
 
+// Function prompts the user to add a new department
 function createNewDepartment() {
     inquirer
         .prompt([
@@ -96,13 +98,15 @@ function createNewDepartment() {
                 message: "Enter Overhead Cost"
             }
         ]).then(function (result) {
+            // Insert new department with input user
             let query = "INSERT INTO departments (department_name, over_head_costs)";
             query += " values(?, ?)";
             connection.query(query, [result.departmentName, result.overHeadCost], function (err, response) {
                 if (err) throw err;
+                // Select new data added to be use by AsciiTable rows
                 connection.query("SELECT * FROM departments WHERE department_id=?", [response.insertId], function (err, result) {
                     if (err) throw err;
-                    //console.log(result);
+
                     var table = new AsciiTable("New Department added");
                     table
                         .setHeading('Department ID', 'Department Name', 'Overhead Cost')
